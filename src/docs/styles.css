@@ -3,3 +3,10 @@ body {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	margin: 0;
 }
+
+.target {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: red;
+}
