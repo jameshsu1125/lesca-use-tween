@@ -3,8 +3,6 @@ logs
 *.log
 npm-debug.log*
 
-# Ignore artifacts:
-lib/
 
 # Dependency directories
 node_modules/
