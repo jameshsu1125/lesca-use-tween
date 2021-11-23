@@ -6,7 +6,7 @@ import './styles.css';
 
 function Demo() {
 	const targetRef = useRef();
-	const [target, setTarget] = useTween({ ref: targetRef, top: 10, left: 10 });
+	const [target, setTarget] = useTween();
 
 	return (
 		<>
