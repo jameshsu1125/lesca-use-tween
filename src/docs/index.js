@@ -1,23 +1,19 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import { render } from 'react-dom';
-import useTween from '../lib/index';
+import { useTween, Bezier } from '../lib/index';
 
 import './styles.css';
 
 const Demo = () => {
-	const targetRef = useRef();
-	const [target, setTarget] = useTween({ time: 2000, ref: targetRef, width: 100 });
+	const [style, tween] = useTween({ width: '0px', height: '0px' });
 
 	useEffect(() => {
-		setTarget({
-			width: 1000,
-			time: 10000,
-		});
+		tween(1000, { width: '100px', height: '200px' }, { delay: 2000, easing: Bezier.easeInQuart });
 	}, []);
 
 	return (
 		<>
-			<div ref={targetRef} className='target' />
+			<div style={style} className='target' />
 		</>
 	);
 };
