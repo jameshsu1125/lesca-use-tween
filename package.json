@@ -1,6 +1,6 @@
 {
 	"name": "lesca-use-tween",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "npm-base-package",
 	"main": "lib/index.js",
 	"scripts": {
@@ -43,10 +43,10 @@
 		"webpack-dev-server": "^4.5.0"
 	},
 	"author": "jamehsu1125 <jameshsu1125@gmail.com>",
-	"homepage": "https://github.com/jameshsu1125/lesca-useTween",
+	"homepage": "https://github.com/jameshsu1125/lesca-use-tween",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:jameshsu1125/lesca-useTween.git"
+		"url": "git@github.com:jameshsu1125/lesca-use-tween.git"
 	},
 	"dependencies": {
 		"color": "^4.0.2",
