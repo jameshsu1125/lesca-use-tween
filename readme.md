@@ -9,13 +9,23 @@ npm install lesca-use-tween --save
 # Usage
 
 ```javascript
-import useTween from '../lib/index';
+import { useTween, Bezier } from 'lesca-use-tween';
 
-const component = () => {
-	const [style, tweenStyle] = useTween({ width: '0px', height: '0px' });
+const Component = () => {
+	const [style, setStyle] = useTween({ width: '0px', height: '0px', backgroundColor: '#ff6600' });
 
 	useEffect(() => {
-		tween(1000, { width: '100px', height: '200px' }, { delay: 2000 });
+		setStyle(
+			1000,
+			{ width: '100px', height: '200px', backgroundColor: '#ff0000' },
+			{
+				easing: Bezier.easeOut,
+				delay: 2000,
+				onStart: () => {},
+				onUpdate: () => {},
+				onComeplete: () => {},
+			},
+		);
 	}, []);
 
 	return <div style={style} />;
@@ -24,15 +34,34 @@ const component = () => {
 
 # Methods
 
-| method   |    options    |    description    | default |
-| :------- | :-----------: | :---------------: | ------: |
-| useTween | style Objects | React style props |         |
+| method                 |   options    |     description     | default |
+| :--------------------- | :----------: | :-----------------: | ------: |
+| useTween(initialStyle) | initialState | React css-inline-js |         |
 
-# Properties
+##### React css-inline-js
 
-| Properties                       |  type   |       description        | default |
-| :------------------------------- | :-----: | :----------------------: | ------: |
-| .tween(duration, style, setting) |         |                          |         |
-| (duration)                       | number  |      tween duration      |    1000 |
-| (style)                          | object  |    React style props     |         |
-| (setting)                        | Objects | {delay, onStart, easing} |         |
+color, backgroundColor, borderColor... About color properties use **hex(#FF6600)** only.
+
+# Hook State Medthod
+
+| method                                                                      |       options       |   description    | default |
+| :-------------------------------------------------------------------------- | :-----------------: | :--------------: | ------: |
+| **#setStyle([duration](#Options), [style](#Options), [setting](#Options))** | [options](#Options) | same as useState |         |
+
+# Options
+
+| Options  |  type   |     description     | default |
+| :------- | :-----: | :-----------------: | ------: |
+| duration | number  |   tween duration    |    1000 |
+| style    | object  | React css-inline-js |         |
+| setting  | objects | [Setting](#setting) |         |
+
+# Setting
+
+| setting    |   type   |                             description                             |             default |
+| :--------- | :------: | :-----------------------------------------------------------------: | ------------------: |
+| easing     |  array   | css [Bezier](https://www.cssportal.com/css-cubic-bezier-generator/) | Bezier.easeOutQuart |
+| delay      |  number  |                           delay duration                            |                   0 |
+| onStart    | function |                        call when tween start                        |                     |
+| onUpdate   | function |                         call for each frame                         |                     |
+| onComplete | function |                       call for tween finished                       |                     |

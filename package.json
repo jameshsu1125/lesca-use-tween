@@ -1,6 +1,6 @@
 {
 	"name": "lesca-use-tween",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"description": "npm-base-package",
 	"main": "lib/index.js",
 	"scripts": {
@@ -49,6 +49,7 @@
 		"url": "git@github.com:jameshsu1125/lesca-useTween.git"
 	},
 	"dependencies": {
+		"color": "^4.0.2",
 		"lesca-object-tweener": "^2.1.0",
 		"react-use": "^17.3.1"
 	}

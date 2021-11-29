@@ -1,46 +1,52 @@
 import Tweener, { Bezier } from 'lesca-object-tweener';
 import { useState } from 'react';
-
-const splitUnit = (e) => {
-	return e.match(/^([0-9]+\.?[0-9]*)(.*)/);
-};
-
-const withUnit = (e, unit) => {
-	const s = {};
-	Object.entries(e).forEach((t) => {
-		const [key, value] = t;
-		s[key] = `${value}${unit[key]}`;
-	});
-	return s;
-};
+import { UnitSpliter, UnitConbiner } from './constants';
 
 const defaultSetting = {
 	easing: Bezier.easeOutQuart,
 	delay: 0,
 	onStart: () => {},
+	onUpdate: () => {},
+	onComplete: () => {},
 };
 
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
-
 	return [
 		state,
 		(duration, style, setting) => {
 			const opt = { ...defaultSetting, ...setting };
+			const unit = {};
 
 			const from = {};
-			const unit = {};
 			Object.entries(state).forEach((e) => {
 				const [classname, value] = e;
-				const [, i, u] = splitUnit(value);
-				from[classname] = Number(i);
-				unit[classname] = u;
+				const result = UnitSpliter(classname, value);
+				if (result) {
+					const [pureValue, pureUnit] = result;
+					if (pureUnit === 'hsl') {
+						Object.entries(pureValue).forEach((e) => {
+							const [key, v] = e;
+							from[`${classname}@${key}`] = v;
+						});
+					} else from[classname] = pureValue;
+					unit[classname] = pureUnit;
+				}
 			});
+
 			const to = {};
 			Object.entries(style).forEach((e) => {
 				const [classname, value] = e;
-				const [, i] = splitUnit(value);
-				to[classname] = Number(i);
+				const result = UnitSpliter(classname, value);
+				if (result) {
+					const [pureValue, pureUnit] = result;
+					if (pureUnit === 'hsl') {
+						Object.entries(pureValue).forEach((e) => {
+							const [key, v] = e;
+							to[`${classname}@${key}`] = v;
+						});
+					} else to[classname] = pureValue;
+				}
 			});
 
 			new Tweener({
@@ -48,8 +54,14 @@ const useTween = (initialState) => {
 				from,
 				duration,
 				...opt,
-				onUpdate: (e) => setstate(withUnit(e, unit)),
-				onComplete: (e) => setstate(withUnit(e, unit)),
+				onUpdate: (e) => {
+					setstate(UnitConbiner(e, unit));
+					opt.onUpdate();
+				},
+				onComplete: (e) => {
+					setstate(UnitConbiner(e, unit));
+					opt.onComplete();
+				},
 			});
 		},
 	];

@@ -5,16 +5,46 @@ import { useTween, Bezier } from '../lib/index';
 import './styles.css';
 
 const Demo = () => {
-	const [style, tween] = useTween({ width: '0px', height: '0px' });
+	const [style, setStyle] = useTween({
+		width: '0px',
+		height: '0px',
+		backgroundColor: '#ff6600',
+		zIndex: 1,
+	});
 
 	useEffect(() => {
-		tween(1000, { width: '100px', height: '200px' }, { delay: 2000, easing: Bezier.easeInQuart });
+		// console.log(style);
+	}, [style]);
+
+	useEffect(() => {
+		setStyle(
+			800,
+			{
+				width: '100px',
+				height: '200px',
+				backgroundColor: '#ff0000',
+				zIndex: 100,
+			},
+			{
+				delay: 2000,
+				easing: Bezier.easeOutBack,
+				onStart: () => {
+					console.log('onStart');
+				},
+				onUpdate: () => {
+					console.log('onUpdate');
+				},
+				onComplete: () => {
+					console.log('onComplete');
+				},
+			},
+		);
 	}, []);
 
 	return (
-		<>
+		<div className='container'>
 			<div style={style} className='target' />
-		</>
+		</div>
 	);
 };
 
