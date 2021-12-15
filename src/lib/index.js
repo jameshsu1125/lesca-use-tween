@@ -1,5 +1,5 @@
 import Tweener, { Bezier } from 'lesca-object-tweener';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { UnitSpliter, UnitConbiner } from './constants';
 
 const defaultSetting = {
@@ -10,15 +10,16 @@ const defaultSetting = {
 	onComplete: () => {},
 };
 
-const tweener = new Tweener();
-
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
+	const tweenerRef = useRef(new Tweener());
+
 	return [
 		state,
 		(duration, style, setting) => {
 			const opt = { ...defaultSetting, ...setting };
 			const unit = {};
+			const tweener = tweenerRef.current;
 
 			const from = {};
 			Object.entries(state).forEach((e) => {
@@ -61,11 +62,11 @@ const useTween = (initialState) => {
 					...opt,
 					onUpdate: (e) => {
 						setstate(UnitConbiner(e, unit));
-						opt.onUpdate();
+						opt.onUpdate(e);
 					},
 					onComplete: (e) => {
 						setstate(UnitConbiner(e, unit));
-						opt.onComplete();
+						opt.onComplete(e);
 					},
 				})
 				.play();
