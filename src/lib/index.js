@@ -10,6 +10,8 @@ const defaultSetting = {
 	onComplete: () => {},
 };
 
+const tweener = new Tweener();
+
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
 	return [
@@ -49,20 +51,24 @@ const useTween = (initialState) => {
 				}
 			});
 
-			new Tweener({
-				to,
-				from,
-				duration,
-				...opt,
-				onUpdate: (e) => {
-					setstate(UnitConbiner(e, unit));
-					opt.onUpdate();
-				},
-				onComplete: (e) => {
-					setstate(UnitConbiner(e, unit));
-					opt.onComplete();
-				},
-			});
+			tweener
+				.stop()
+				.clearQueue()
+				.add({
+					to,
+					from,
+					duration,
+					...opt,
+					onUpdate: (e) => {
+						setstate(UnitConbiner(e, unit));
+						opt.onUpdate();
+					},
+					onComplete: (e) => {
+						setstate(UnitConbiner(e, unit));
+						opt.onComplete();
+					},
+				})
+				.play();
 		},
 	];
 };
