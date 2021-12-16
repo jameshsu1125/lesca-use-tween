@@ -3,8 +3,14 @@ import Color from 'color';
 const useColor = ['backgroundColor', 'color', 'borderColor'];
 
 const pureUnit = (e) => {
-	const [, i, u] = String(e).match(/^([0-9]+\.?[0-9]*)(.*)/);
-	return [Number(i), u];
+	const t = String(e);
+	const isN = t.slice(0, 1) === '-';
+	let mt;
+	if (isN) mt = t.substring(1);
+	else mt = t;
+
+	const [, i, u] = mt.match(/^([0-9]+\.?[0-9]*)(.*)/);
+	return [Number(i) * (isN ? -1 : 1), u];
 };
 
 const hex2hls = (e) => {

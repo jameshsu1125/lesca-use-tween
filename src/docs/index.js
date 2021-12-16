@@ -9,6 +9,7 @@ const Demo = () => {
 		width: '0px',
 		height: '0px',
 		backgroundColor: '#ff6600',
+		marginLeft: '0px',
 		zIndex: 1,
 	});
 
@@ -24,6 +25,7 @@ const Demo = () => {
 				height: '200px',
 				backgroundColor: '#ff0000',
 				zIndex: 100,
+				marginLeft: '-20px',
 			},
 			{
 				delay: 2000,
