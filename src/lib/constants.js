@@ -1,6 +1,9 @@
 import Color from 'color';
 
 const useColor = ['backgroundColor', 'color', 'borderColor'];
+const useTransform = ['scale', 'x', 'y', 'rotate'];
+const funtionName = { scale: 'scale', rotate: 'rotate', x: 'translateX', y: 'translateY' };
+const unitName = { scale: '', rotate: 'deg', x: 'px', y: 'px' };
 
 const pureUnit = (e) => {
 	const t = String(e);
@@ -32,10 +35,19 @@ export const UnitConbiner = (e, u) => {
 		const [key, value] = t;
 		const [classname, c] = key.split('@');
 		const unit = u[classname];
+		const isTransform = useTransform.filter((e) => e === key);
 		if (unit === 'hsl') {
 			result[classname] = { ...result[classname], [c]: value };
+		} else if (isTransform.length > 0) {
+			const [key] = isTransform;
+			const f = funtionName[key];
+			const u = unitName[key];
+			if (result.transform) {
+				result.transform += ` ${f}(${value}${u})`;
+			} else result.transform = `${f}(${value}${u})`;
 		} else result[classname] = `${value}${unit}`;
 	});
+
 	Object.entries(result).forEach((e) => {
 		const [key, value] = e;
 		const isHSL = useColor.filter((e) => e === key);

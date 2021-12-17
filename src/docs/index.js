@@ -6,11 +6,15 @@ import './styles.css';
 
 const Demo = () => {
 	const [style, setStyle] = useTween({
-		width: '0px',
-		height: '0px',
+		// width: '0px',
+		// height: '0px',
 		backgroundColor: '#ff6600',
-		marginLeft: '0px',
+		// marginLeft: '0px',
 		zIndex: 1,
+		scale: 0,
+		x: 0,
+		rotate: 0,
+		y: 0,
 	});
 
 	useEffect(() => {
@@ -21,11 +25,15 @@ const Demo = () => {
 		setStyle(
 			800,
 			{
-				width: '100px',
-				height: '200px',
+				// width: '100px',
+				// height: '200px',
 				backgroundColor: '#ff0000',
 				zIndex: 100,
-				marginLeft: '-20px',
+				// marginLeft: '-200px',
+				scale: 1,
+				x: 500,
+				rotate: 180,
+				y: 200,
 			},
 			{
 				delay: 2000,
@@ -33,11 +41,11 @@ const Demo = () => {
 				onStart: () => {
 					console.log('onStart');
 				},
-				onUpdate: () => {
-					console.log('onUpdate');
+				onUpdate: (e) => {
+					// console.log('onUpdate');
 				},
 				onComplete: () => {
-					console.log('onComplete');
+					// console.log('onComplete');
 				},
 			},
 		);
