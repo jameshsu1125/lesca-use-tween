@@ -6,10 +6,8 @@ import './styles.css';
 
 const Demo = () => {
 	const [style, setStyle] = useTween({
-		// width: '0px',
-		// height: '0px',
+		width: '100px',
 		backgroundColor: '#ff6600',
-		// marginLeft: '0px',
 		zIndex: 1,
 		scale: 0,
 		x: 0,
@@ -23,13 +21,10 @@ const Demo = () => {
 
 	useEffect(() => {
 		setStyle(
-			800,
 			{
-				// width: '100px',
-				// height: '200px',
 				backgroundColor: '#ff0000',
 				zIndex: 100,
-				// marginLeft: '-200px',
+				width: '200px',
 				scale: 1,
 				x: 500,
 				rotate: 180,
@@ -37,6 +32,7 @@ const Demo = () => {
 			},
 			{
 				delay: 2000,
+				duration: 800,
 				easing: Bezier.easeOutBack,
 				onStart: () => {
 					console.log('onStart');
@@ -49,6 +45,33 @@ const Demo = () => {
 				},
 			},
 		);
+
+		setTimeout(() => {
+			setStyle(
+				{
+					backgroundColor: '#ff0000',
+					scale: 0.5,
+					width: '300px',
+					x: -100,
+					rotate: 90,
+					y: -100,
+				},
+				{
+					delay: 0,
+					duration: 2000,
+					easing: Bezier.easeOutBack,
+					onStart: () => {
+						console.log('onStart');
+					},
+					onUpdate: (e) => {
+						// console.log('onUpdate');
+					},
+					onComplete: () => {
+						// console.log('onComplete');
+					},
+				},
+			);
+		}, 2500);
 	}, []);
 
 	return (

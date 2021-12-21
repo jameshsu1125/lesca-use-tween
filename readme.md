@@ -16,11 +16,11 @@ const Component = () => {
 
 	useEffect(() => {
 		setStyle(
-			1000,
 			{ width: '100px', height: '200px', backgroundColor: '#ff0000' },
 			{
-				easing: Bezier.easeOut,
-				delay: 2000,
+				delay: 2000, // default 0
+				duration: 1000, // default 1000
+				easing: Bezier.easeOut, // default easeOutQuart
 				onStart: () => {},
 				onUpdate: () => {},
 				onComeplete: () => {},
@@ -44,23 +44,23 @@ color, backgroundColor, borderColor... About color properties use **hex(#FF6600)
 
 # Hook State Medthod
 
-| method                                                                      |       options       |   description    | default |
-| :-------------------------------------------------------------------------- | :-----------------: | :--------------: | ------: |
-| **#setStyle([duration](#Options), [style](#Options), [setting](#Options))** | [options](#Options) | same as useState |         |
+| method                                                 |       options       |   description    | default |
+| :----------------------------------------------------- | :-----------------: | :--------------: | ------: |
+| **#setStyle( [style](#Options), [setting](#Options))** | [options](#Options) | same as useState |         |
 
 # Options
 
-| Options  |  type   |     description     | default |
-| :------- | :-----: | :-----------------: | ------: |
-| duration | number  |   tween duration    |    1000 |
-| style    | object  | React css-inline-js |         |
-| setting  | objects | [Setting](#setting) |         |
+| Options |  type   |     description     | default |
+| :------ | :-----: | :-----------------: | ------: |
+| style   | object  | React css-inline-js |         |
+| setting | objects | [Setting](#setting) |         |
 
 # Setting
 
 | setting    |   type   |                             description                             |             default |
 | :--------- | :------: | :-----------------------------------------------------------------: | ------------------: |
 | easing     |  array   | css [Bezier](https://www.cssportal.com/css-cubic-bezier-generator/) | Bezier.easeOutQuart |
+| duration   |  number  |                           tween duration                            |                1000 |
 | delay      |  number  |                           delay duration                            |                   0 |
 | onStart    | function |                        call when tween start                        |                     |
 | onUpdate   | function |                         call for each frame                         |                     |

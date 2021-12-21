@@ -51,6 +51,7 @@ const Bezier = {
 };
 
 const defaultSetting = {
+	duration: 1000,
 	easing: Bezier.easeOutQuart,
 	delay: 0,
 	onStart: () => {},
@@ -61,29 +62,43 @@ const defaultSetting = {
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
 	const tweenerRef = useRef(new Tweener());
+	const fromRef = useRef();
+	const unitRef = useRef();
 
 	return [
 		state,
-		(duration, style, setting) => {
-			const opt = { ...defaultSetting, ...setting };
-			const unit = {};
+		(style, setting) => {
+			let opt = {};
+			if (typeof setting === 'number') {
+				opt = { ...defaultSetting, duration: setting };
+			} else {
+				opt = { ...defaultSetting, ...setting };
+			}
 			const tweener = tweenerRef.current;
 
-			const from = {};
-			Object.entries(state).forEach((e) => {
-				const [classname, value] = e;
-				const result = UnitSpliter(classname, value);
-				if (result) {
-					const [pureValue, pureUnit] = result;
-					if (pureUnit === 'hsl') {
-						Object.entries(pureValue).forEach((e) => {
-							const [key, v] = e;
-							from[`${classname}@${key}`] = v;
-						});
-					} else from[classname] = pureValue;
-					unit[classname] = pureUnit;
-				}
-			});
+			let from = {};
+			let unit = {};
+
+			if (!fromRef.current) {
+				Object.entries(state).forEach((e) => {
+					const [classname, value] = e;
+					const result = UnitSpliter(classname, value);
+					if (result) {
+						const [pureValue, pureUnit] = result;
+						if (pureUnit === 'hsl') {
+							Object.entries(pureValue).forEach((e) => {
+								const [key, v] = e;
+								from[`${classname}@${key}`] = v;
+							});
+						} else from[classname] = pureValue;
+						unit[classname] = pureUnit;
+					}
+				});
+				unitRef.current = unit;
+			} else {
+				from = fromRef.current;
+				unit = unitRef.current;
+			}
 
 			const to = {};
 			Object.entries(style).forEach((e) => {
@@ -106,13 +121,14 @@ const useTween = (initialState) => {
 				.add({
 					to,
 					from,
-					duration,
 					...opt,
 					onUpdate: (e) => {
+						fromRef.current = e;
 						setstate(UnitConbiner(e, unit));
 						opt.onUpdate(e);
 					},
 					onComplete: (e) => {
+						fromRef.current = e;
 						setstate(UnitConbiner(e, unit));
 						opt.onComplete(e);
 					},
