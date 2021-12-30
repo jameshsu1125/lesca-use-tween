@@ -48,8 +48,6 @@ export const InitTransformCombiner = (style) => {
 		}
 	});
 
-	console.log(result);
-
 	return result;
 };
 
