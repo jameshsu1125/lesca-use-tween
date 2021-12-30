@@ -29,7 +29,31 @@ export const UnitSpliter = (styleName, value) => {
 	return pureUnit(value);
 };
 
-export const UnitConbiner = (e, u) => {
+export const InitTransformCombiner = (style) => {
+	const result = {};
+	Object.entries(style).forEach((t) => {
+		const [key, value] = t;
+
+		const isTransform = useTransform.filter((e) => e === key);
+
+		if (isTransform.length > 0) {
+			const [key] = isTransform;
+			const f = funtionName[key];
+			const u = unitName[key];
+			if (result.transform) {
+				result.transform += ` ${f}(${value}${u})`;
+			} else result.transform = `${f}(${value}${u})`;
+		} else {
+			result[key] = value;
+		}
+	});
+
+	console.log(result);
+
+	return result;
+};
+
+export const UnitCombiner = (e, u) => {
 	const result = {};
 	Object.entries(e).forEach((t) => {
 		const [key, value] = t;

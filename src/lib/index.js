@@ -1,6 +1,6 @@
 import Tweener from 'lesca-object-tweener';
 import { useState, useRef } from 'react';
-import { UnitSpliter, UnitConbiner } from './constants';
+import { UnitSpliter, UnitCombiner, InitTransformCombiner } from './constants';
 
 const Bezier = {
 	// basic
@@ -66,7 +66,7 @@ const useTween = (initialState) => {
 	const unitRef = useRef();
 
 	return [
-		state,
+		InitTransformCombiner(state),
 		(style, setting) => {
 			let opt = {};
 			if (typeof setting === 'number') {
@@ -124,12 +124,12 @@ const useTween = (initialState) => {
 					...opt,
 					onUpdate: (e) => {
 						fromRef.current = e;
-						setstate(UnitConbiner(e, unit));
+						setstate(UnitCombiner(e, unit));
 						opt.onUpdate(e);
 					},
 					onComplete: (e) => {
 						fromRef.current = e;
-						setstate(UnitConbiner(e, unit));
+						setstate(UnitCombiner(e, unit));
 						opt.onComplete(e);
 					},
 				})

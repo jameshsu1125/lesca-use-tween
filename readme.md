@@ -41,6 +41,11 @@ const Component = () => {
 ##### React css-inline-js
 
 color, backgroundColor, borderColor... About color properties use **hex(#FF6600)** only.
+Transform need to split to { scale, rotate, x, y };
+
+```javascript
+const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(20px)' }; => { scale:2, rotate:90, x:10, y:20 }
+```
 
 # Hook State Medthod
 
