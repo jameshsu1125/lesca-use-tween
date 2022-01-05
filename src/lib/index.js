@@ -61,10 +61,37 @@ const defaultSetting = {
 
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
-
-	const tweenerRef = useRef(new Tweener({ from: state, to: state, duration: 0 }).play());
 	const fromRef = useRef();
 	const unitRef = useRef();
+
+	const tranFrom = () => {
+		let from = {};
+		let unit = {};
+
+		if (!fromRef.current) {
+			Object.entries(state).forEach((e) => {
+				const [classname, value] = e;
+				const result = UnitSpliter(classname, value);
+				if (result) {
+					const [pureValue, pureUnit] = result;
+					if (pureUnit === 'hsl') {
+						Object.entries(pureValue).forEach((e) => {
+							const [key, v] = e;
+							from[`${classname}@${key}`] = v;
+						});
+					} else from[classname] = pureValue;
+					unit[classname] = pureUnit;
+				}
+			});
+			unitRef.current = unit;
+		} else {
+			from = fromRef.current;
+			unit = unitRef.current;
+		}
+		return { from, unit };
+	};
+
+	const tweenerRef = useRef(new Tweener({ from: tranFrom().from }));
 
 	return [
 		InitTransformCombiner(state),
@@ -76,30 +103,7 @@ const useTween = (initialState) => {
 				opt = { ...defaultSetting, ...setting };
 			}
 			const tweener = tweenerRef.current;
-
-			let from = {};
-			let unit = {};
-
-			if (!fromRef.current) {
-				Object.entries(state).forEach((e) => {
-					const [classname, value] = e;
-					const result = UnitSpliter(classname, value);
-					if (result) {
-						const [pureValue, pureUnit] = result;
-						if (pureUnit === 'hsl') {
-							Object.entries(pureValue).forEach((e) => {
-								const [key, v] = e;
-								from[`${classname}@${key}`] = v;
-							});
-						} else from[classname] = pureValue;
-						unit[classname] = pureUnit;
-					}
-				});
-				unitRef.current = unit;
-			} else {
-				from = fromRef.current;
-				unit = unitRef.current;
-			}
+			const { from, unit } = tranFrom();
 
 			const to = {};
 			Object.entries(style).forEach((e) => {

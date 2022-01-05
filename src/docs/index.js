@@ -4,6 +4,8 @@ import { useTween, Bezier } from '../lib/index';
 
 import './styles.css';
 
+const s = { index: 0 };
+
 const Demo = () => {
 	const [style, setStyle] = useTween({
 		scale: 1,
@@ -15,11 +17,16 @@ const Demo = () => {
 	});
 
 	document.addEventListener('mousedown', () => {
-		setStyle({ x: 0 });
+		s.index++;
+		if (s.index === 1) {
+			setStyle({ x: 500 });
+		} else if (s.index === 2) {
+			setStyle({ scale: 2, x: 0, y: 0 });
+		}
 	});
 
 	useEffect(() => {
-		console.log(style);
+		// console.log(style);
 	}, [style]);
 
 	return (
