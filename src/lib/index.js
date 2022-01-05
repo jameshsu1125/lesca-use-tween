@@ -61,7 +61,8 @@ const defaultSetting = {
 
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
-	const tweenerRef = useRef(new Tweener());
+
+	const tweenerRef = useRef(new Tweener({ from: state, to: state, duration: 0 }).play());
 	const fromRef = useRef();
 	const unitRef = useRef();
 

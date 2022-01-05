@@ -14,8 +14,12 @@ const Demo = () => {
 		height: '100px',
 	});
 
+	document.addEventListener('mousedown', () => {
+		setStyle({ x: 0 });
+	});
+
 	useEffect(() => {
-		// console.log(style);
+		console.log(style);
 	}, [style]);
 
 	return (
