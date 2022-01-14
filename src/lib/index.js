@@ -59,6 +59,8 @@ const defaultSetting = {
 	onComplete: () => {},
 };
 
+const { requestAnimationFrame } = window;
+
 const useTween = (initialState) => {
 	const [state, setstate] = useState(initialState);
 	const fromRef = useRef();
@@ -121,16 +123,20 @@ const useTween = (initialState) => {
 			});
 
 			tweener
+				.stop()
+				.clearQueue()
 				.add({
 					to,
 					from,
 					...opt,
 					onUpdate: (e) => {
+						// console.log(e);
 						fromRef.current = e;
 						setstate(UnitCombiner(e, unit));
 						opt.onUpdate(e);
 					},
 					onComplete: (e) => {
+						// console.log(e, 'c');
 						fromRef.current = e;
 						setstate(UnitCombiner(e, unit));
 						opt.onComplete(e);
