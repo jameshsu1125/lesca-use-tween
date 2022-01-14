@@ -121,8 +121,6 @@ const useTween = (initialState) => {
 			});
 
 			tweener
-				.stop()
-				.clearQueue()
 				.add({
 					to,
 					from,
