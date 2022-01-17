@@ -12,7 +12,11 @@ npm install lesca-use-tween --save
 import { useTween, Bezier } from 'lesca-use-tween';
 
 const Component = () => {
-	const [style, setStyle] = useTween({ width: '0px', height: '0px', backgroundColor: '#ff6600' });
+	const [style, setStyle, destory] = useTween({
+		width: '0px',
+		height: '0px',
+		backgroundColor: '#ff6600',
+	});
 
 	useEffect(() => {
 		setStyle(
@@ -26,6 +30,9 @@ const Component = () => {
 				onComeplete: () => {},
 			},
 		);
+		() => {
+			destory();
+		};
 	}, []);
 
 	return <div style={style} />;
@@ -55,10 +62,11 @@ const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(2
 
 # Options
 
-| Options |  type   |     description     | default |
-| :------ | :-----: | :-----------------: | ------: |
-| style   | object  | React css-inline-js |         |
-| setting | objects | [Setting](#setting) |         |
+| Options |   type   |     description     | default |
+| :------ | :------: | :-----------------: | ------: |
+| style   |  object  | React css-inline-js |         |
+| setting | objects  | [Setting](#setting) |         |
+| destory | function |   stop animation    |         |
 
 # Setting
 
