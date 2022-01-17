@@ -1,6 +1,6 @@
 {
 	"name": "lesca-use-tween",
-	"version": "1.3.3",
+	"version": "1.3.4",
 	"description": "npm-base-package",
 	"main": "lib/index.js",
 	"scripts": {

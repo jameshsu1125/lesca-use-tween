@@ -62,11 +62,11 @@ const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(2
 
 # Options
 
-| Options |   type   |     description     | default |
-| :------ | :------: | :-----------------: | ------: |
-| style   |  object  | React css-inline-js |         |
-| setting | objects  | [Setting](#setting) |         |
-| destory | function |   stop animation    |         |
+| Options  |   type   |     description     | default |
+| :------- | :------: | :-----------------: | ------: |
+| style    |  object  | React css-inline-js |         |
+| setting  | objects  | [Setting](#setting) |         |
+| dispatch | function |     stop update     |         |
 
 # Setting
 
