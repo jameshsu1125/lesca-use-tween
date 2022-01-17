@@ -130,19 +130,20 @@ const useTween = (initialState) => {
 					from,
 					...opt,
 					onUpdate: (e) => {
-						// console.log(e);
 						fromRef.current = e;
 						setstate(UnitCombiner(e, unit));
 						opt.onUpdate(e);
 					},
 					onComplete: (e) => {
-						// console.log(e, 'c');
 						fromRef.current = e;
 						setstate(UnitCombiner(e, unit));
 						opt.onComplete(e);
 					},
 				})
 				.play();
+		},
+		() => {
+			tweenerRef.current?.stop();
 		},
 	];
 };

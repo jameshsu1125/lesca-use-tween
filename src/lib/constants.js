@@ -11,7 +11,6 @@ const pureUnit = (e) => {
 	let mt;
 	if (isN) mt = t.substring(1);
 	else mt = t;
-
 	const [, i, u] = mt.match(/^([0-9]+\.?[0-9]*)(.*)/);
 	return [Number(i) * (isN ? -1 : 1), u];
 };
@@ -33,9 +32,7 @@ export const InitTransformCombiner = (style) => {
 	const result = {};
 	Object.entries(style).forEach((t) => {
 		const [key, value] = t;
-
 		const isTransform = useTransform.filter((e) => e === key);
-
 		if (isTransform.length > 0) {
 			const [key] = isTransform;
 			const f = funtionName[key];
@@ -43,9 +40,7 @@ export const InitTransformCombiner = (style) => {
 			if (result.transform) {
 				result.transform += ` ${f}(${value}${u})`;
 			} else result.transform = `${f}(${value}${u})`;
-		} else {
-			result[key] = value;
-		}
+		} else result[key] = value;
 	});
 
 	return result;
