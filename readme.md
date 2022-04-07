@@ -42,9 +42,8 @@ const Component = () => {
         onComeplete: () => {},
       },
     );
-    () => {
-      destory();
-    };
+
+    return () => destory();
   }, []);
 
   return <div style={style} />;
