@@ -1,39 +1,35 @@
-import { useEffect } from 'react';
-import { render } from 'react-dom';
-import { useTween, Bezier } from '../lib/index';
+import { Container } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import Navigation from './components/navigation';
+import Demo from './pages/demo';
+import Usage from './pages/usage';
+import './styles.less';
+import { theme } from './theme';
 
-import './styles.css';
+const App = () => {
+  const [state, setState] = useState('demo');
 
-const s = { index: 0 };
+  const appendPage = () => {
+    switch (state) {
+      default:
+      case 'demo':
+        return <Demo />;
 
-const Demo = () => {
-	const [style, setStyle] = useTween({
-		scale: 1,
-		x: 300,
-		rotate: 40,
-		y: 200,
-		width: '100px',
-		height: '100px',
-	});
+      case 'usage':
+        return <Usage />;
+    }
+  };
 
-	document.addEventListener('mousedown', () => {
-		s.index++;
-		if (s.index === 1) {
-			setStyle({ x: 500 });
-		} else if (s.index === 2) {
-			setStyle({ scale: 2, x: 0, y: 0 });
-		}
-	});
-
-	useEffect(() => {
-		// console.log(style);
-	}, [style]);
-
-	return (
-		<div className='container'>
-			<div style={style} className='target' />
-		</div>
-	);
+  return (
+    <ThemeProvider theme={theme}>
+      <Navigation setState={setState} state={state} />
+      <Container style={{ paddingTop: '70px' }} maxWidth='lg'>
+        {appendPage()}
+      </Container>
+    </ThemeProvider>
+  );
 };
 
-render(<Demo />, document.getElementById('app'));
+createRoot(document.getElementById('app')).render(<App />);
