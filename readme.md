@@ -10,6 +10,8 @@
 
 It replace jquery animate. The transition suport easing.
 
+#### [Live Demo](https://jameshsu1125.github.io/lesca-use-tween/)
+
 # Installation
 
 ```sh
