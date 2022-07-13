@@ -4,9 +4,10 @@
     [
       "@babel/preset-react",
       {
-        "runtime": "automatic" // 只要用js[x]就不用import React from 'react';
+        "runtime": "automatic"
       }
-    ]
+    ],
+    "@babel/preset-typescript"
   ],
   "plugins": [
     "@babel/plugin-proposal-object-rest-spread",
