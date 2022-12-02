@@ -1,6 +1,6 @@
 {
   "name": "lesca-use-tween",
-  "version": "2.2.1",
+  "version": "2.3.1",
   "description": "transition DOM for hook",
   "main": "lib/index.js",
   "scripts": {
@@ -58,7 +58,6 @@
   },
   "author": "jamehsu1125 <jameshsu1125@gmail.com>",
   "dependencies": {
-    "color": "^4.2.3",
     "lesca-object-tweener": "^2.4.4"
   }
 }

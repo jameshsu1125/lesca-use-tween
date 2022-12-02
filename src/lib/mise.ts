@@ -1,6 +1,5 @@
-// import { Property, Unit } from './type';
-import Color from 'color';
-import { Colors, HSL } from './type';
+import { hexToHSL } from './hex2hsl';
+import { HSL } from './type';
 
 const useColor = ['backgroundColor', 'color', 'borderColor'];
 const useTransform = ['scale', 'x', 'y', 'rotate'];
@@ -8,11 +7,9 @@ const funtionName = { scale: 'scale', rotate: 'rotate', x: 'translateX', y: 'tra
 const unitName = { scale: '', rotate: 'deg', x: 'px', y: 'px' };
 
 const hex2hls = (e: any) => {
-  const c = Color(e);
-  const colorParam = c.hsl() as unknown as Colors;
-  const { color, model } = colorParam;
+  const color = hexToHSL(e);
   const [h, s, l] = color;
-  return [{ h, s, l }, model];
+  return [{ h, s, l }, 'hsl'];
 };
 
 const pureUnit = (e: any) => {
