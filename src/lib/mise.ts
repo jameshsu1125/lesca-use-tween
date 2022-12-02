@@ -17,14 +17,12 @@ const hex2hls = (e: any) => {
 
 const pureUnit = (e: any) => {
   const t = String(e);
-  const isN = t.slice(0, 1) === '-';
-  let mt;
-  if (isN) mt = t.substring(1);
-  else mt = t;
-  const reg = mt.match(/^([0-9]+\.?[0-9]*)(.*)/);
-  if (reg) {
-    const [, i, u] = reg;
-    return [Number(i) * (isN ? -1 : 1), u];
+
+  const num = window.parseFloat(t);
+  const unit = t.split(String(num)).join('');
+
+  if (!isNaN(num)) {
+    return [num, unit];
   }
   return [Number(e), ''];
 };

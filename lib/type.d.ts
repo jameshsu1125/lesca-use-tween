@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-export declare type Setting = {
+export type Setting = {
     duration: number;
     easing: number[];
     delay: number;
@@ -11,7 +11,7 @@ export interface Colors {
     color: number[];
     model: string;
 }
-export declare type HSL = {
+export type HSL = {
     h: number;
     s: number;
     l: number;
