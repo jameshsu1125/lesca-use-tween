@@ -149,11 +149,11 @@ const useTween = (initialState: CSS) => {
   ];
 };
 
-const TweenProvider = ({ children, defalutStyle, tweenStyle, tweenOptions }: ProviderProps) => {
+const TweenProvider = ({ children, defalutStyle, tweenStyle, options }: ProviderProps) => {
   const [style, setStyle, destory] = useTween(defalutStyle);
 
   useEffect(() => {
-    setStyle(tweenStyle, tweenOptions);
+    setStyle(tweenStyle, options);
     return () => destory();
   }, [tweenStyle]);
 
@@ -163,7 +163,7 @@ const TweenProvider = ({ children, defalutStyle, tweenStyle, tweenOptions }: Pro
 TweenProvider.defaultProps = {
   defalutStyle: { opacity: 0 },
   tweenStyle: { opacity: 1 },
-  tweenOptions: { duration: 1000 },
+  options: { duration: 1000 },
 };
 
 export { useTween, Bezier, TweenProvider };

@@ -30,5 +30,5 @@ export interface ProviderProps {
   children: ReactElement;
   defalutStyle: CSS;
   tweenStyle: CSS;
-  tweenOptions: Setting;
+  options: Setting;
 }

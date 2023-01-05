@@ -63,7 +63,7 @@ const Demo = () => {
       <TweenProvider
         defalutStyle={{ opacity: 0, x: 100 }}
         tweenStyle={tweenStyle}
-        tweenOptions={{ delay: 500, duration: 2000 }}
+        options={{ delay: 500, duration: 2000 }}
       >
         <div>component</div>
       </TweenProvider>
