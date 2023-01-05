@@ -157,7 +157,7 @@ const TweenProvider = ({ children, defalutStyle, tweenStyle, options }: Provider
     return () => destory();
   }, [tweenStyle]);
 
-  return Children.map(children, (child) => cloneElement(child, { style }));
+  return Children.map(children, (child) => cloneElement(child, { ...child.props, style }));
 };
 
 TweenProvider.defaultProps = {
