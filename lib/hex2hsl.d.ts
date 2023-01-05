@@ -1,1 +1,1 @@
-export function hexToHSL(H: any): number[];
+export declare const hexToHSL: (H: any) => number[];

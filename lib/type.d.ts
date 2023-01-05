@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactElement } from 'react';
 export type Setting = {
     duration: number;
     easing: number[];
@@ -20,4 +20,10 @@ export interface CSS extends CSSProperties {
     x: string;
     y: string;
     scale: string;
+}
+export interface ProviderProps {
+    children: ReactElement;
+    defalutStyle: CSS;
+    tweenStyle: CSS;
+    tweenOptions: Setting;
 }

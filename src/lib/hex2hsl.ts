@@ -1,8 +1,7 @@
-export const hexToHSL = (H) => {
-  // Convert hex to RGB first
-  let r = 0,
-    g = 0,
-    b = 0;
+export const hexToHSL = (H: any) => {
+  let r: any = 0,
+    g: any = 0,
+    b: any = 0;
 
   if (H.length == 4) {
     r = '0x' + H[1] + H[1];
@@ -14,7 +13,6 @@ export const hexToHSL = (H) => {
     b = '0x' + H[5] + H[6];
   }
 
-  // Then to HSL
   r /= 255;
   g /= 255;
   b /= 255;

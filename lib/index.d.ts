@@ -1,4 +1,4 @@
-import { CSS } from './type';
+import { CSS, ProviderProps } from './type';
 declare const Bezier: {
     linear: number[];
     easeIn: number[];
@@ -30,5 +30,19 @@ declare const Bezier: {
     easeInOutBack: number[];
 };
 declare const useTween: (initialState: CSS) => any[];
-export { useTween, Bezier };
+declare const TweenProvider: {
+    ({ children, defalutStyle, tweenStyle, tweenOptions }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
+    defaultProps: {
+        defalutStyle: {
+            opacity: number;
+        };
+        tweenStyle: {
+            opacity: number;
+        };
+        tweenOptions: {
+            duration: number;
+        };
+    };
+};
+export { useTween, Bezier, TweenProvider };
 export default useTween;

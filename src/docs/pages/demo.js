@@ -1,6 +1,7 @@
 import { Button, ButtonGroup } from '@mui/material';
+import { useState } from 'react';
 
-import useTween from '../../lib';
+import useTween, { TweenProvider } from '../../lib';
 
 const Demo = () => {
   const [style, setStyle] = useTween({
@@ -10,6 +11,10 @@ const Demo = () => {
     y: '0px',
     opacity: 1,
   });
+
+  const [tweenStyle, setTweenStyle] = useState({ opacity: 1, x: 0 });
+
+  console.log('update');
 
   return (
     <div className='Demo'>
@@ -53,6 +58,24 @@ const Demo = () => {
           }}
         >
           opacity
+        </Button>
+      </ButtonGroup>
+      <TweenProvider
+        defalutStyle={{ opacity: 0, x: 100 }}
+        tweenStyle={tweenStyle}
+        tweenOptions={{ delay: 500, duration: 2000 }}
+      >
+        <div>component</div>
+      </TweenProvider>
+      <ButtonGroup variant='contained'>
+        <Button
+          onClick={() => {
+            const x = Math.random() * 100;
+            const opacity = Math.random();
+            setTweenStyle({ opacity, x });
+          }}
+        >
+          new tween
         </Button>
       </ButtonGroup>
     </div>

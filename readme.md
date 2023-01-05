@@ -21,36 +21,42 @@ npm install lesca-use-tween --save
 
 ## Usage
 
-As a Node module:
+#### use hook
 
 ```JSX
-import { useTween, Bezier } from 'lesca-use-tween';
+import useTween from 'lesca-use-tween';
 
 const Component = () => {
-  const [style, setStyle, destory] = useTween({
-    width: '0px',
-    height: '0px',
-    backgroundColor: '#ff6600',
-  });
+  const [style, setStyle, destory] = useTween({ opacity:0 });
 
   useEffect(() => {
-    setStyle(
-      { width: '100px', height: '200px', backgroundColor: '#ff0000' },
-      {
-        delay: 2000, // default 0
-        duration: 1000, // default 1000
-        easing: Bezier.easeOut, // default easeOutQuart
-        onStart: () => {},
-        onUpdate: () => {},
-        onComeplete: () => {},
-      },
-    );
-
+    setStyle({ opacity:1 }); // tween opacity 0 => 1
     return () => destory();
   }, []);
 
   return <div style={style} />;
 };
+```
+
+#### use provider
+
+prevent render on each frame. we can use provider component.
+
+```JSX
+import { TweenProvider } from 'lesca-use-tween';
+
+const Component = () => {
+  // ! will not keep render each frame in this component.
+  return (
+    <TweenProvider
+        defalutStyle={{ opacity: 0 }}
+        tweenStyle={{ opacity: 1 }}
+        tweenOptions={{ duration: 1000 }}
+    >
+      <div>component</div>
+    </TweenProvider>)
+};
+
 ```
 
 ## Development
