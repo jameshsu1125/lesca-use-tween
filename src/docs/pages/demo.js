@@ -61,7 +61,7 @@ const Demo = () => {
         </Button>
       </ButtonGroup>
       <TweenProvider
-        defalutStyle={{ opacity: 0, x: 100 }}
+        defaultStyle={{ opacity: 0, x: 100 }}
         tweenStyle={tweenStyle}
         options={{ delay: 500, duration: 2000 }}
       >
