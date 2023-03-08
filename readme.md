@@ -27,11 +27,11 @@ npm install lesca-use-tween --save
 import useTween from 'lesca-use-tween';
 
 const Component = () => {
-  const [style, setStyle, destory] = useTween({ opacity:0 });
+  const [style, setStyle, destroy] = useTween({ opacity:0 });
 
   useEffect(() => {
     setStyle({ opacity:1 }); // tween opacity 0 => 1
-    return () => destory();
+    return () => destroy();
   }, []);
 
   return <div style={style} />;
@@ -49,7 +49,7 @@ const Component = () => {
   // ! will not keep render each frame in this component.
   return (
     <TweenProvider
-        defalutStyle={{ opacity: 0 }}
+        defaultStyle={{ opacity: 0 }}
         tweenStyle={{ opacity: 1 }}
         tweenOptions={{ duration: 1000 }}
     >

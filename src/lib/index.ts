@@ -1,6 +1,6 @@
 import Tweener from 'lesca-object-tweener';
 import { Children, cloneElement, useEffect, useRef, useState } from 'react';
-import { InitTransformCombiner, UnitCombiner, UnitSpliter } from './mise';
+import { InitTransformCombiner, UnitCombiner, unitSplitter } from './mise';
 import { Setting, CSS, ProviderProps } from './type';
 
 const Bezier = {
@@ -61,7 +61,7 @@ const defaultSetting: Setting = {
 };
 
 const useTween = (initialState: CSS) => {
-  const [state, setstate] = useState(initialState);
+  const [state, setState] = useState(initialState);
   const fromRef = useRef({});
   const unitRef = useRef({});
 
@@ -72,7 +72,7 @@ const useTween = (initialState: CSS) => {
     if (!Object.keys(fromRef.current).length) {
       Object.entries(state).forEach((e) => {
         const [classname, value] = e;
-        const result = UnitSpliter(classname, value);
+        const result = unitSplitter(classname, value);
         if (result) {
           const [pureValue, pureUnit] = result;
           if (pureUnit === 'hsl') {
@@ -110,7 +110,8 @@ const useTween = (initialState: CSS) => {
       const to: any = {};
       Object.entries(style).forEach((e) => {
         const [classname, value] = e;
-        const result = UnitSpliter(classname, value);
+
+        const result = unitSplitter(classname, value);
         if (result) {
           const [pureValue, pureUnit] = result;
           if (pureUnit === 'hsl') {
@@ -132,12 +133,12 @@ const useTween = (initialState: CSS) => {
           ...opt,
           onUpdate: (e: any) => {
             fromRef.current = e;
-            setstate(UnitCombiner(e, unit));
+            setState(UnitCombiner(e, unit));
             opt.onUpdate(e);
           },
           onComplete: (e: any) => {
             fromRef.current = e;
-            setstate(UnitCombiner(e, unit));
+            setState(UnitCombiner(e, unit));
             opt.onComplete(e);
           },
         })
@@ -149,19 +150,19 @@ const useTween = (initialState: CSS) => {
   ];
 };
 
-const TweenProvider = ({ children, defalutStyle, tweenStyle, options }: ProviderProps) => {
-  const [style, setStyle, destory] = useTween(defalutStyle);
+const TweenProvider = ({ children, defaultStyle, tweenStyle, options }: ProviderProps) => {
+  const [style, setStyle, destroy] = useTween(defaultStyle);
 
   useEffect(() => {
-    setStyle(tweenStyle, options);
-    return () => destory();
+    if (tweenStyle) setStyle(tweenStyle, options);
+    return () => destroy();
   }, [tweenStyle]);
 
   return Children.map(children, (child) => cloneElement(child, { ...child.props, style }));
 };
 
 TweenProvider.defaultProps = {
-  defalutStyle: { opacity: 0 },
+  defaultStyle: { opacity: 0 },
   tweenStyle: { opacity: 1 },
   options: { duration: 1000 },
 };

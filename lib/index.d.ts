@@ -31,9 +31,9 @@ declare const Bezier: {
 };
 declare const useTween: (initialState: CSS) => any[];
 declare const TweenProvider: {
-    ({ children, defalutStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
+    ({ children, defaultStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
     defaultProps: {
-        defalutStyle: {
+        defaultStyle: {
             opacity: number;
         };
         tweenStyle: {

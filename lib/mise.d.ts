@@ -1,4 +1,4 @@
-export declare const UnitSpliter: (styleName: string, value: any) => (string | {
+export declare const unitSplitter: (styleName: string, value: any) => (string | {
     h: number;
     s: number;
     l: number;

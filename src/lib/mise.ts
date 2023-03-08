@@ -3,7 +3,7 @@ import { HSL } from './type';
 
 const useColor = ['backgroundColor', 'color', 'borderColor'];
 const useTransform = ['scale', 'x', 'y', 'rotate'];
-const funtionName = { scale: 'scale', rotate: 'rotate', x: 'translateX', y: 'translateY' };
+const functionName = { scale: 'scale', rotate: 'rotate', x: 'translateX', y: 'translateY' };
 const unitName = { scale: '', rotate: 'deg', x: 'px', y: 'px' };
 
 const hex2hls = (e: any) => {
@@ -24,7 +24,7 @@ const pureUnit = (e: any) => {
   return [Number(e), ''];
 };
 
-export const UnitSpliter = (styleName: string, value: any) => {
+export const unitSplitter = (styleName: string, value: any) => {
   const isColor = useColor.filter((e) => e === styleName).length !== 0;
   if (isColor) return hex2hls(value);
   return pureUnit(value);
@@ -38,7 +38,7 @@ export const InitTransformCombiner = (style: object) => {
 
     if (isTransform.length > 0) {
       const [key] = isTransform;
-      const matchKey = Object.entries(funtionName).filter((e) => e[0] === key);
+      const matchKey = Object.entries(functionName).filter((e) => e[0] === key);
       const f = matchKey[0][1];
       const matchUnit = Object.entries(unitName).filter((e) => e[0] === key);
       const u = matchUnit[0][1];
@@ -63,7 +63,7 @@ export const UnitCombiner = (e: any, u: any) => {
       result[classname] = { ...result[classname], [c]: value };
     } else if (isTransform.length > 0) {
       const [key] = isTransform;
-      const matchKey = Object.entries(funtionName).filter((e) => e[0] === key);
+      const matchKey = Object.entries(functionName).filter((e) => e[0] === key);
       const f = matchKey[0][1];
       const matchUnit = Object.entries(unitName).filter((e) => e[0] === key);
       const u = matchUnit[0][1];
