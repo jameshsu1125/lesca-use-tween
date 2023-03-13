@@ -26,4 +26,5 @@ export interface ProviderProps {
     defaultStyle: CSS;
     tweenStyle: CSS;
     options: Setting;
+    active?: boolean;
 }

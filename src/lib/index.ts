@@ -150,13 +150,13 @@ const useTween = (initialState: CSS) => {
   ];
 };
 
-const TweenProvider = ({ children, defaultStyle, tweenStyle, options }: ProviderProps) => {
+const TweenProvider = ({ children, defaultStyle, tweenStyle, options, active }: ProviderProps) => {
   const [style, setStyle, destroy] = useTween(defaultStyle);
 
   useEffect(() => {
-    if (tweenStyle) setStyle(tweenStyle, options);
+    if (active) if (tweenStyle) setStyle(tweenStyle, options);
     return () => destroy();
-  }, [tweenStyle]);
+  }, [tweenStyle, options]);
 
   return Children.map(children, (child) => cloneElement(child, { ...child.props, style }));
 };
@@ -165,6 +165,7 @@ TweenProvider.defaultProps = {
   defaultStyle: { opacity: 0 },
   tweenStyle: { opacity: 1 },
   options: { duration: 1000 },
+  active: true,
 };
 
 export { useTween, Bezier, TweenProvider };

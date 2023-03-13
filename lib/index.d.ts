@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { CSS, ProviderProps } from './type';
 declare const Bezier: {
     linear: number[];
@@ -31,7 +32,7 @@ declare const Bezier: {
 };
 declare const useTween: (initialState: CSS) => any[];
 declare const TweenProvider: {
-    ({ children, defaultStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
+    ({ children, defaultStyle, tweenStyle, options, active }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
     defaultProps: {
         defaultStyle: {
             opacity: number;
@@ -42,6 +43,7 @@ declare const TweenProvider: {
         options: {
             duration: number;
         };
+        active: boolean;
     };
 };
 export { useTween, Bezier, TweenProvider };
