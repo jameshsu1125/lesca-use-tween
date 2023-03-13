@@ -156,7 +156,7 @@ const TweenProvider = ({ children, defaultStyle, tweenStyle, options, active }: 
   useEffect(() => {
     if (active) if (tweenStyle) setStyle(tweenStyle, options);
     return () => destroy();
-  }, [tweenStyle, options]);
+  }, [tweenStyle, options, active]);
 
   return Children.map(children, (child) => cloneElement(child, { ...child.props, style }));
 };
