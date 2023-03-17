@@ -1,5 +1,5 @@
 import Tweener from 'lesca-object-tweener';
-import { Children, cloneElement, useEffect, useRef, useState } from 'react';
+import { Children, cloneElement, memo, useEffect, useRef, useState } from 'react';
 import { InitTransformCombiner, UnitCombiner, unitSplitter } from './mise';
 import { Setting, CSS, ProviderProps } from './type';
 
@@ -150,7 +150,7 @@ const useTween = (initialState: CSS) => {
   ];
 };
 
-const TweenProvider = ({ children, defaultStyle, tweenStyle, options, active }: ProviderProps) => {
+const TweenComponent = ({ children, defaultStyle, tweenStyle, options, active }: ProviderProps) => {
   const [style, setStyle, destroy] = useTween(defaultStyle);
 
   useEffect(() => {
@@ -161,12 +161,14 @@ const TweenProvider = ({ children, defaultStyle, tweenStyle, options, active }: 
   return Children.map(children, (child) => cloneElement(child, { ...child.props, style }));
 };
 
-TweenProvider.defaultProps = {
+TweenComponent.defaultProps = {
   defaultStyle: { opacity: 0 },
   tweenStyle: { opacity: 1 },
   options: { duration: 1000 },
   active: true,
 };
+
+const TweenProvider = memo<any>(TweenComponent);
 
 export { useTween, Bezier, TweenProvider };
 export default useTween;

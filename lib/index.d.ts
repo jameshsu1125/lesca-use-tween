@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { CSS, ProviderProps } from './type';
+import { CSS } from './type';
 declare const Bezier: {
     linear: number[];
     easeIn: number[];
@@ -31,20 +31,6 @@ declare const Bezier: {
     easeInOutBack: number[];
 };
 declare const useTween: (initialState: CSS) => any[];
-declare const TweenProvider: {
-    ({ children, defaultStyle, tweenStyle, options, active }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
-    defaultProps: {
-        defaultStyle: {
-            opacity: number;
-        };
-        tweenStyle: {
-            opacity: number;
-        };
-        options: {
-            duration: number;
-        };
-        active: boolean;
-    };
-};
+declare const TweenProvider: import("react").MemoExoticComponent<any>;
 export { useTween, Bezier, TweenProvider };
 export default useTween;
