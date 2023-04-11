@@ -12,9 +12,7 @@ const Demo = () => {
     opacity: 1,
   });
 
-  const [tweenStyle, setTweenStyle] = useState({ opacity: 1, x: 0 });
-
-  console.log('update');
+  const [tweenStyle, setTweenStyle] = useState();
 
   return (
     <div className='Demo'>
@@ -60,13 +58,11 @@ const Demo = () => {
           opacity
         </Button>
       </ButtonGroup>
-      <TweenProviderMemo
-        defaultStyle={{ opacity: 0, x: 100 }}
-        tweenStyle={tweenStyle}
-        options={{ delay: 500, duration: 2000 }}
-      >
-        <div>component</div>
-      </TweenProviderMemo>
+
+      <TweenProvider defaultStyle={{ x: 10, opacity: 0.5 }} tweenStyle={tweenStyle}>
+        <div>ccccc</div>
+      </TweenProvider>
+
       <ButtonGroup variant='contained'>
         <Button
           onClick={() => {

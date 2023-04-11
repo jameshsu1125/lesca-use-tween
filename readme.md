@@ -9,7 +9,7 @@
 
 # Why use it?
 
-It replace jquery animate. The transition suport easing.
+A style tweener for react hook.
 
 #### [Live Demo](https://jameshsu1125.github.io/lesca-use-tween/)
 
@@ -65,7 +65,7 @@ const Component = () => {
 
 | method                              |   options    |     description     |                     return |
 | :---------------------------------- | :----------: | :-----------------: | -------------------------: |
-| useTween(**initialStyle**:_object_) | initialStyle | React css-inline-js | [style, setStyle, destory] |
+| useTween(**initialStyle**:_object_) | initialStyle | React css-inline-js | [style, setStyle, destroy] |
 
 ##### React css-inline-js
 
@@ -76,7 +76,7 @@ Transform need to split to {**scale**, **rotate**, **x**, **y** };
 const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(20px)' }; => { scale:2, rotate:90, x:10, y:20 }
 ```
 
-#### Hook State Medthod
+#### Hook State Method
 
 | method                                                           |       options       |   description    |
 | :--------------------------------------------------------------- | :-----------------: | :--------------: |
