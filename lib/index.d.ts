@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { CSS, ProviderProps } from './type';
 declare const Bezier: {
     linear: number[];
