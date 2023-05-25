@@ -1,6 +1,6 @@
 {
   "name": "lesca-use-tween",
-  "version": "2.5.1",
+  "version": "2.5.4",
   "description": "transition DOM for hook",
   "main": "lib/index.js",
   "scripts": {
@@ -15,8 +15,8 @@
   },
   "keywords": [
     "lesca",
-    "衝康吉",
-    "jameshsu1125"
+    "tween",
+    "animation"
   ],
   "license": "MIT",
   "devDependencies": {

@@ -15,7 +15,7 @@ const hex2hls = (e: any) => {
 const pureUnit = (e: any) => {
   const t = String(e);
 
-  const num = window.parseFloat(t);
+  const num = parseFloat(t);
   const unit = t.split(String(num)).join('');
 
   if (!isNaN(num)) {
