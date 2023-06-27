@@ -1,6 +1,6 @@
 {
   "name": "lesca-use-tween",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "description": "transition DOM for hook",
   "main": "lib/index.js",
   "scripts": {

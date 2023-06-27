@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { Setting, CSS, ProviderProps } from './type';
+import { CSS, ProviderProps, Tween } from './type';
 declare const Bezier: {
     linear: number[];
     easeIn: number[];
@@ -30,8 +30,6 @@ declare const Bezier: {
     outBack: number[];
     inOutBack: number[];
 };
-type Options = Setting | number;
-type Tween = [CSS, (style: CSS, options: Options) => void, () => void];
 declare const useTween: (initialState: CSS) => Tween;
 declare const TweenProvider: {
     ({ children, initStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
@@ -42,5 +40,5 @@ declare const TweenProvider: {
         preload: boolean;
     };
 };
-export { useTween, Bezier, TweenProvider };
+export { Bezier, TweenProvider, useTween };
 export default useTween;

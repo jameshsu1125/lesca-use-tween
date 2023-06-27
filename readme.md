@@ -91,14 +91,14 @@ const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(2
 
 #### Setting
 
-| setting    |    type    |       description       |         default |
-| :--------- | :--------: | :---------------------: | --------------: |
-| easing     |  _array_   |      css [Bezier]       | Bezier.OutQuart |
-| duration   |  _number_  |     tween duration      |            1000 |
-| delay      |  _number_  |     delay duration      |               0 |
-| onStart    | _function_ |  call when tween start  |                 |
-| onUpdate   | _function_ |   call for each frame   |                 |
-| onComplete | _function_ | call for tween finished |                 |
+| setting  |    type    |       description       |         default |
+| :------- | :--------: | :---------------------: | --------------: |
+| easing   |  _array_   |      css [Bezier]       | Bezier.OutQuart |
+| duration |  _number_  |     tween duration      |            1000 |
+| delay    |  _number_  |     delay duration      |               0 |
+| onStart  | _function_ |  call when tween start  |                 |
+| onUpdate | _function_ |   call for each frame   |                 |
+| onEnd    | _function_ | call for tween finished |                 |
 
 ### Features
 

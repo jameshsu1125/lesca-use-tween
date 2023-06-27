@@ -6,7 +6,7 @@ export type Setting = {
   delay: number;
   onStart: Function;
   onUpdate: Function;
-  onComplete: Function;
+  onEnd: Function;
 };
 
 export interface Colors {
@@ -32,3 +32,6 @@ export interface ProviderProps {
   tweenStyle?: CSS;
   options?: Setting;
 }
+
+export type Options = Setting | number;
+export type Tween = [CSS, (style: CSS, options: Options) => void, () => void];
