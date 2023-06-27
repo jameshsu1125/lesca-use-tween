@@ -1,38 +1,40 @@
 /// <reference types="react" />
-import { CSS, ProviderProps } from './type';
+import { Setting, CSS, ProviderProps } from './type';
 declare const Bezier: {
     linear: number[];
     easeIn: number[];
     easeOut: number[];
     easeInOut: number[];
-    easeInSine: number[];
-    easeOutSine: number[];
-    easeInOutSine: number[];
-    easeInCubic: number[];
-    easeOutCubic: number[];
-    easeInOutCubic: number[];
-    easeInQuint: number[];
-    easeOutQuint: number[];
-    easeInOutQuint: number[];
-    easeInCirc: number[];
-    easeOutCirc: number[];
-    easeInOutCirc: number[];
-    easeInQuad: number[];
-    easeOutQuad: number[];
-    easeInOutQuad: number[];
-    easeInQuart: number[];
-    easeOutQuart: number[];
-    easeInOutQuart: number[];
-    easeInExpo: number[];
-    easeOutExpo: number[];
-    easeInOutExpo: number[];
-    easeInBack: number[];
-    easeOutBack: number[];
-    easeInOutBack: number[];
+    inSine: number[];
+    outSine: number[];
+    inOutSine: number[];
+    inCubic: number[];
+    outCubic: number[];
+    inOutCubic: number[];
+    InQuint: number[];
+    OutQuint: number[];
+    InOutQuint: number[];
+    inCirc: number[];
+    outCirc: number[];
+    inOutCirc: number[];
+    inQuad: number[];
+    outQuad: number[];
+    inOutQuad: number[];
+    inQuart: number[];
+    outQuart: number[];
+    inOutQuart: number[];
+    inExpo: number[];
+    outExpo: number[];
+    inOutExpo: number[];
+    inBack: number[];
+    outBack: number[];
+    inOutBack: number[];
 };
-declare const useTween: (initialState: CSS) => any[];
+type Options = Setting | number;
+type Tween = [CSS, (style: CSS, options: Options) => void, () => void];
+declare const useTween: (initialState: CSS) => Tween;
 declare const TweenProvider: {
-    ({ children, defaultStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
+    ({ children, initStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
     defaultProps: {
         options: {
             duration: number;

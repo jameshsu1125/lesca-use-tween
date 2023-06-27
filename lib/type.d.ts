@@ -23,7 +23,7 @@ export interface CSS extends CSSProperties {
 }
 export interface ProviderProps {
     children: ReactElement;
-    defaultStyle: CSS;
+    initStyle: CSS;
     tweenStyle?: CSS;
     options?: Setting;
 }

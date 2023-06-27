@@ -59,7 +59,7 @@ const Demo = () => {
         </Button>
       </ButtonGroup>
 
-      <TweenProvider defaultStyle={{ x: 10, opacity: 0.5 }} tweenStyle={tweenStyle}>
+      <TweenProvider initStyle={{ x: 10, opacity: 0.5 }} tweenStyle={tweenStyle}>
         <div>ccccc</div>
       </TweenProvider>
 

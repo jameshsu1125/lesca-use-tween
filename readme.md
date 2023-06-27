@@ -23,14 +23,14 @@ npm install lesca-use-tween --save
 
 #### use hook
 
-```JSX
+```jsx
 import useTween from 'lesca-use-tween';
 
 const Component = () => {
-  const [style, setStyle, destroy] = useTween({ opacity:0 });
+  const [style, setStyle, destroy] = useTween({ opacity: 0 });
 
   useEffect(() => {
-    setStyle({ opacity:1 }); // tween opacity 0 => 1
+    setStyle({ opacity: 1 }); // tween opacity 0 => 1
     return () => destroy();
   }, []);
 
@@ -42,30 +42,30 @@ const Component = () => {
 
 prevent render on each frame. we can use provider component.
 
-```JSX
+```jsx
 import { TweenProvider } from 'lesca-use-tween';
 
 const Component = () => {
   // ! will not keep render each frame in this component.
   return (
     <TweenProvider
-        defaultStyle={{ opacity: 0 }}
-        tweenStyle={{ opacity: 1 }}
-        tweenOptions={{ duration: 1000 }}
+      initStyle={{ opacity: 0 }}
+      tweenStyle={{ opacity: 1 }}
+      tweenOptions={{ duration: 1000 }}
     >
       <div>component</div>
-    </TweenProvider>)
+    </TweenProvider>
+  );
 };
-
 ```
 
 ## Development
 
 ### Methods
 
-| method                              |   options    |     description     |                     return |
-| :---------------------------------- | :----------: | :-----------------: | -------------------------: |
-| useTween(**initialStyle**:_object_) | initialStyle | React css-inline-js | [style, setStyle, destroy] |
+| method                           |  options  |     description     |                     return |
+| :------------------------------- | :-------: | :-----------------: | -------------------------: |
+| useTween(**initStyle**:_object_) | initStyle | React css-inline-js | [style, setStyle, destroy] |
 
 ##### React css-inline-js
 
@@ -73,7 +73,7 @@ color, backgroundColor, borderColor... About color properties use **hex(#FF6600)
 Transform need to split to {**scale**, **rotate**, **x**, **y** };
 
 ```javascript
-const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(20px)' }; => { scale:2, rotate:90, x:10, y:20 }
+const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(20px)' } => { scale:2, rotate:90, x:10, y:20 }
 ```
 
 #### Hook State Method
@@ -91,14 +91,14 @@ const style = { transform: 'scale(2) rotate(90deg) translateX(10px) translateY(2
 
 #### Setting
 
-| setting    |    type    |       description       |             default |
-| :--------- | :--------: | :---------------------: | ------------------: |
-| easing     |  _array_   |      css [Bezier]       | Bezier.easeOutQuart |
-| duration   |  _number_  |     tween duration      |                1000 |
-| delay      |  _number_  |     delay duration      |                   0 |
-| onStart    | _function_ |  call when tween start  |                     |
-| onUpdate   | _function_ |   call for each frame   |                     |
-| onComplete | _function_ | call for tween finished |                     |
+| setting    |    type    |       description       |         default |
+| :--------- | :--------: | :---------------------: | --------------: |
+| easing     |  _array_   |      css [Bezier]       | Bezier.OutQuart |
+| duration   |  _number_  |     tween duration      |            1000 |
+| delay      |  _number_  |     delay duration      |               0 |
+| onStart    | _function_ |  call when tween start  |                 |
+| onUpdate   | _function_ |   call for each frame   |                 |
+| onComplete | _function_ | call for tween finished |                 |
 
 ### Features
 
