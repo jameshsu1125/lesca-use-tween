@@ -21,9 +21,9 @@ export type HSL = {
 };
 
 export interface CSS extends CSSProperties {
-  x: string;
-  y: string;
-  scale: string;
+  x?: string;
+  y?: string;
+  scale?: string;
 }
 
 export interface ProviderProps {
@@ -34,4 +34,5 @@ export interface ProviderProps {
 }
 
 export type Options = Setting | number;
-export type Tween = [CSS, (style: CSS, options: Options) => void, () => void];
+
+export type Tween = [CSS, (style: CSS, options?: Options) => void, () => void];

@@ -17,9 +17,9 @@ export type HSL = {
     l: number;
 };
 export interface CSS extends CSSProperties {
-    x: string;
-    y: string;
-    scale: string;
+    x?: string;
+    y?: string;
+    scale?: string;
 }
 export interface ProviderProps {
     children: ReactElement;
@@ -28,4 +28,4 @@ export interface ProviderProps {
     options?: Setting;
 }
 export type Options = Setting | number;
-export type Tween = [CSS, (style: CSS, options: Options) => void, () => void];
+export type Tween = [CSS, (style: CSS, options?: Options) => void, () => void];
