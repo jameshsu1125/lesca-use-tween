@@ -1,6 +1,6 @@
 {
   "name": "lesca-use-tween",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "transition DOM for hook",
   "main": "lib/index.js",
   "scripts": {
@@ -28,7 +28,6 @@
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.2",
-    "@babel/runtime": "^7.23.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.13",
@@ -59,6 +58,7 @@
   },
   "author": "jamehsu1125 <jameshsu1125@gmail.com>",
   "dependencies": {
+    "@babel/runtime": "^7.23.2",
     "lesca-object-tweener": "^2.4.5"
   }
 }
