@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import Tweener from 'lesca-object-tweener';
 import { CSS, ProviderProps, Tween } from './type';
 declare const Bezier: {
     linear: number[];
@@ -40,5 +41,5 @@ declare const TweenProvider: {
         preload: boolean;
     };
 };
-export { Bezier, TweenProvider, useTween };
+export { Bezier, TweenProvider, useTween, Tweener };
 export default useTween;

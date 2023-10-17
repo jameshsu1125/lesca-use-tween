@@ -168,5 +168,5 @@ TweenProvider.defaultProps = {
   preload: false,
 };
 
-export { Bezier, TweenProvider, useTween };
+export { Bezier, TweenProvider, useTween, Tweener };
 export default useTween;
