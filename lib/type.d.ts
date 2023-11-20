@@ -25,7 +25,7 @@ export interface ProviderProps {
     children: ReactElement;
     initStyle: CSS;
     tweenStyle?: CSS;
-    options?: Setting;
+    options?: Partial<Setting>;
 }
-export type Options = Setting | number;
+export type Options = Partial<Setting> | number;
 export type Tween = [CSS, (style: CSS, options?: Options) => void, () => void];
