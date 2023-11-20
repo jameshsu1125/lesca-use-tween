@@ -17,9 +17,9 @@ export type HSL = {
     l: number;
 };
 export interface CSS extends CSSProperties {
-    x?: string;
-    y?: string;
-    scale?: string;
+    x?: string | number;
+    y?: string | number;
+    scale?: string | number;
 }
 export interface ProviderProps {
     children: ReactElement;
