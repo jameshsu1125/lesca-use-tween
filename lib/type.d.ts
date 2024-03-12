@@ -16,10 +16,11 @@ export type HSL = {
     s: number;
     l: number;
 };
-export interface CSS extends CSSProperties {
+export interface CSS extends Omit<CSSProperties, 'rotate'> {
     x?: string | number;
     y?: string | number;
     scale?: string | number;
+    rotate?: string | number;
 }
 export interface ProviderProps {
     children: ReactElement;
@@ -28,4 +29,4 @@ export interface ProviderProps {
     options?: Partial<Setting>;
 }
 export type Options = Partial<Setting> | number;
-export type Tween = [CSS, (style: CSS, options?: Options) => void, () => void];
+export type Tween = [CSSProperties, (style: CSS, options?: Options) => void, () => void];

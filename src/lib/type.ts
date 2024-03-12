@@ -20,10 +20,11 @@ export type HSL = {
   l: number;
 };
 
-export interface CSS extends CSSProperties {
+export interface CSS extends Omit<CSSProperties, 'rotate'> {
   x?: string | number;
   y?: string | number;
   scale?: string | number;
+  rotate?: string | number;
 }
 
 export interface ProviderProps {
@@ -35,4 +36,4 @@ export interface ProviderProps {
 
 export type Options = Partial<Setting> | number;
 
-export type Tween = [CSS, (style: CSS, options?: Options) => void, () => void];
+export type Tween = [CSSProperties, (style: CSS, options?: Options) => void, () => void];

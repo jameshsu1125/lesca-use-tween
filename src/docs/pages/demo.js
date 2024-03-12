@@ -6,6 +6,7 @@ import useTween, { TweenProvider, TweenProviderMemo } from '../../lib';
 const Demo = () => {
   const [style, setStyle] = useTween({
     scale: 1,
+    rotate: 0,
     backgroundColor: '#006600',
     x: '0px',
     y: '0px',
@@ -31,6 +32,14 @@ const Demo = () => {
           }}
         >
           scale
+        </Button>
+        <Button
+          onClick={() => {
+            const rotate = Math.random() * 360;
+            setStyle({ rotate });
+          }}
+        >
+          rotate
         </Button>
         <Button
           onClick={() => {

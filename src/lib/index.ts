@@ -1,5 +1,5 @@
 import Tweener from 'lesca-object-tweener';
-import { Children, cloneElement, useEffect, useRef, useState } from 'react';
+import { CSSProperties, Children, cloneElement, useEffect, useRef, useState } from 'react';
 import { InitTransformCombiner, UnitCombiner, unitSplitter } from './mise';
 import { CSS, Options, ProviderProps, Setting, Tween } from './type';
 
@@ -61,7 +61,7 @@ const defaultSetting: Setting = {
 };
 
 const useTween = (initialState: CSS): Tween => {
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<CSSProperties>(initialState as CSSProperties);
   const fromRef = useRef({});
   const unitRef = useRef({});
 
@@ -98,7 +98,7 @@ const useTween = (initialState: CSS): Tween => {
 
   return [
     InitTransformCombiner(state),
-    (style: CSS, options: Options) => {
+    (style: CSSProperties, options: Options) => {
       let opt: Setting;
       if (typeof options === 'number') {
         opt = { ...defaultSetting, duration: options };

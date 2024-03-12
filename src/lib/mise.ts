@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { hexToHSL } from './hex2hsl';
 import { HSL } from './type';
 
@@ -49,7 +50,7 @@ export const InitTransformCombiner = (style: object) => {
     } else result[key] = value;
   });
 
-  return result;
+  return result as CSSProperties;
 };
 
 export const UnitCombiner = (e: any, u: any) => {
