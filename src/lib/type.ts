@@ -25,6 +25,11 @@ export interface CSS extends Omit<CSSProperties, 'rotate'> {
   y?: string | number;
   scale?: string | number;
   rotate?: string | number;
+  rotateY?: string | number;
+  rotateX?: string | number;
+  rotateZ?: string | number;
+  skewX?: string | number;
+  skewY?: string | number;
 }
 
 export interface ProviderProps {
