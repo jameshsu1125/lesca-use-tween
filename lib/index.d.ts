@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import Tweener from 'lesca-object-tweener';
 import { CSS, ProviderProps, Tween } from './type';
 declare const Bezier: {
@@ -32,14 +31,6 @@ declare const Bezier: {
     inOutBack: number[];
 };
 declare const useTween: (initialState: CSS) => Tween;
-declare const TweenProvider: {
-    ({ children, initStyle, tweenStyle, options }: ProviderProps): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
-    defaultProps: {
-        options: {
-            duration: number;
-        };
-        preload: boolean;
-    };
-};
+declare const TweenProvider: ({ children, initStyle, tweenStyle, options, }: ProviderProps) => import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>[];
 export { Bezier, TweenProvider, useTween, Tweener };
 export default useTween;

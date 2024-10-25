@@ -3,9 +3,39 @@ import { hexToHSL } from './hex2hsl';
 import { HSL } from './type';
 
 const useColor = ['backgroundColor', 'color', 'borderColor'];
-const useTransform = ['scale', 'x', 'y', 'rotate'];
-const functionName = { scale: 'scale', rotate: 'rotate', x: 'translateX', y: 'translateY' };
-const unitName = { scale: '', rotate: 'deg', x: 'px', y: 'px' };
+const useTransform = [
+  'scale',
+  'x',
+  'y',
+  'rotate',
+  'rotateY',
+  'rotateX',
+  'rotateZ',
+  'skewX',
+  'skewY',
+];
+const functionName = {
+  scale: 'scale',
+  rotate: 'rotate',
+  x: 'translateX',
+  y: 'translateY',
+  skewX: 'skewX',
+  skewY: 'skewY',
+  rotateY: 'rotateY',
+  rotateX: 'rotateX',
+  rotateZ: 'rotateZ',
+};
+const unitName = {
+  scale: '',
+  rotate: 'deg',
+  x: 'px',
+  y: 'px',
+  skewX: 'deg',
+  skewY: 'deg',
+  rotateY: 'deg',
+  rotateX: 'deg',
+  rotateZ: 'deg',
+};
 
 const hex2hls = (e: any) => {
   const color = hexToHSL(e);

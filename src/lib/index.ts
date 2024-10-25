@@ -150,7 +150,12 @@ const useTween = (initialState: CSS): Tween => {
   ];
 };
 
-const TweenProvider = ({ children, initStyle, tweenStyle, options }: ProviderProps) => {
+const TweenProvider = ({
+  children,
+  initStyle,
+  tweenStyle,
+  options = { duration: 1000 },
+}: ProviderProps) => {
   const [style, setStyle, destroy] = useTween(initStyle);
 
   useEffect(() => {
@@ -161,11 +166,6 @@ const TweenProvider = ({ children, initStyle, tweenStyle, options }: ProviderPro
   return Children.map(children, (child) =>
     cloneElement(child, { ...child.props, style: { ...child.props.style, ...style } }),
   );
-};
-
-TweenProvider.defaultProps = {
-  options: { duration: 1000 },
-  preload: false,
 };
 
 export { Bezier, TweenProvider, useTween, Tweener };

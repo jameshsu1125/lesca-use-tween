@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from '@mui/material';
 import { useState } from 'react';
 
-import useTween, { TweenProvider, TweenProviderMemo } from '../../lib';
+import useTween, { TweenProvider } from '../../lib';
 
 const Demo = () => {
   const [style, setStyle] = useTween({
@@ -11,6 +11,9 @@ const Demo = () => {
     x: '0px',
     y: '0px',
     opacity: 1,
+    rotateY: 0,
+    rotateY: 0,
+    rotateZ: 0,
   });
 
   const [tweenStyle, setTweenStyle] = useState();
@@ -65,6 +68,14 @@ const Demo = () => {
           }}
         >
           opacity
+        </Button>
+        <Button
+          onClick={() => {
+            const rotateY = Math.random() * 360;
+            setStyle({ rotateY });
+          }}
+        >
+          rotateY
         </Button>
       </ButtonGroup>
 
