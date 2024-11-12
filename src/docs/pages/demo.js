@@ -80,7 +80,7 @@ const Demo = () => {
       </ButtonGroup>
 
       <TweenProvider initStyle={{ x: 10, opacity: 0.5 }} tweenStyle={tweenStyle}>
-        <div>ccccc</div>
+        ccccc
       </TweenProvider>
 
       <ButtonGroup variant='contained'>

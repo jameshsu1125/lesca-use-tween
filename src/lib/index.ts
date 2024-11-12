@@ -1,5 +1,13 @@
 import Tweener from 'lesca-object-tweener';
-import { CSSProperties, Children, cloneElement, useEffect, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  Children,
+  cloneElement,
+  createElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { InitTransformCombiner, UnitCombiner, unitSplitter } from './mise';
 import { CSS, Options, ProviderProps, Setting, Tween } from './type';
 
@@ -163,9 +171,10 @@ const TweenProvider = ({
     return () => destroy();
   }, [tweenStyle]);
 
-  return Children.map(children, (child) =>
-    cloneElement(child, { ...child.props, style: { ...child.props.style, ...style } }),
-  );
+  return Children.map(children, (child) => {
+    if (typeof child === 'string') return createElement('div', { style, children: child });
+    return cloneElement(child, { ...child.props, style: { ...child.props.style, ...style } });
+  });
 };
 
 export { Bezier, TweenProvider, useTween, Tweener };
