@@ -1,11 +1,13 @@
 {
-  "name": "template-vite-react-npm",
+  "name": "lesca-use-tween",
   "private": false,
-  "description": "xxxxx",
-  "version": "0.0.0",
+  "description": "transition DOM use hooks",
+  "version": "4.0.0",
   "type": "module",
   "keywords": [
-    "lesca"
+    "lesca",
+    "animation",
+    "tween"
   ],
   "files": [
     "lib"

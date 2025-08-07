@@ -20,6 +20,9 @@ export default defineConfig(function (_a) {
                 fileName: 'index',
                 formats: ['es', 'cjs'],
             },
+            rollupOptions: {
+                external: ['react', 'react/jsx-runtime'],
+            },
         },
         css: {
             preprocessorOptions: {
