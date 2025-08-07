@@ -106,7 +106,7 @@ const useTween = (initialState: CSS): Tween => {
 
   return [
     InitTransformCombiner(state),
-    (style: CSSProperties, options: Options) => {
+    (style: CSS, options?: Options) => {
       let opt: Setting;
       if (typeof options === 'number') {
         opt = { ...defaultSetting, duration: options };
@@ -173,7 +173,8 @@ const TweenProvider = ({
 
   return Children.map(children, (child) => {
     if (typeof child === 'string') return createElement('div', { style, children: child });
-    return cloneElement(child, { ...child.props, style: { ...child.props.style, ...style } });
+    const element = child as React.ReactElement<any>;
+    return cloneElement(element, { ...element.props, style: { ...element.props.style, ...style } });
   });
 };
 
