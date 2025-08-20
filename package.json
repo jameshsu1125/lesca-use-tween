@@ -2,7 +2,7 @@
   "name": "lesca-use-tween",
   "private": false,
   "description": "transition DOM use hooks",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "type": "module",
   "keywords": [
     "lesca",

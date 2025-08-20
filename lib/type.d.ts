@@ -30,7 +30,7 @@ export interface CSS extends Omit<CSSProperties, 'rotate'> {
 export interface ProviderProps {
     children: ReactElement;
     initStyle: CSS;
-    tweenStyle?: CSS;
+    tweenStyle?: CSS | false;
     options?: Partial<Setting>;
 }
 export type Options = Partial<Setting> | number;
