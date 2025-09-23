@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import useTween from '.';
+import useTween, { Bezier, TweenProvider } from '.';
 
 const App = () => {
   const [style, setStyle] = useTween({ opacity: 1, backgroundColor: '#ff6600', x: 0, y: 0 });
@@ -25,6 +25,16 @@ const App = () => {
         >
           play
         </button>
+        {[...new Array(10).keys()].map((index) => (
+          <TweenProvider
+            key={index}
+            initStyle={{ x: 0, y: 0 }}
+            tweenStyle={{ x: Math.random() * 100, y: Math.random() * 100 }}
+            options={{ duration: 2000, easing: Bezier.InOutQuint, delay: 500 }}
+          >
+            <div className='h-10 w-10 rounded-full bg-blue-500'></div>
+          </TweenProvider>
+        ))}
       </div>
     </div>
   );
