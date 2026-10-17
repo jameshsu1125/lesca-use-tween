@@ -5,6 +5,8 @@ import { HSL, TweenValues } from './type';
 const useColor = ['backgroundColor', 'color', 'borderColor'];
 const useTransform = [
   'scale',
+  'scaleX',
+  'scaleY',
   'x',
   'y',
   'rotate',
@@ -16,6 +18,8 @@ const useTransform = [
 ];
 const functionName: Record<string, string> = {
   scale: 'scale',
+  scaleX: 'scaleX',
+  scaleY: 'scaleY',
   rotate: 'rotate',
   x: 'translateX',
   y: 'translateY',
@@ -27,6 +31,8 @@ const functionName: Record<string, string> = {
 };
 const unitName: Record<string, string> = {
   scale: '',
+  scaleX: '',
+  scaleY: '',
   rotate: 'deg',
   x: 'px',
   y: 'px',

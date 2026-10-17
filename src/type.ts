@@ -28,6 +28,8 @@ export interface CSS extends Omit<CSSProperties, 'rotate'> {
   x?: string | number;
   y?: string | number;
   scale?: string | number;
+  scaleX?: string | number;
+  scaleY?: string | number;
   rotate?: string | number;
   rotateY?: string | number;
   rotateX?: string | number;
