@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { hexToHSL } from './hex2hsl';
-import { HSL } from './type';
+import { HSL, TweenValues } from './type';
 
 const useColor = ['backgroundColor', 'color', 'borderColor'];
 const useTransform = [
@@ -14,7 +14,7 @@ const useTransform = [
   'skewX',
   'skewY',
 ];
-const functionName = {
+const functionName: Record<string, string> = {
   scale: 'scale',
   rotate: 'rotate',
   x: 'translateX',
@@ -25,7 +25,7 @@ const functionName = {
   rotateX: 'rotateX',
   rotateZ: 'rotateZ',
 };
-const unitName = {
+const unitName: Record<string, string> = {
   scale: '',
   rotate: 'deg',
   x: 'px',
@@ -37,13 +37,12 @@ const unitName = {
   rotateZ: 'deg',
 };
 
-const hex2hls = (e: any) => {
-  const color = hexToHSL(e);
-  const [h, s, l] = color;
+const hex2hls = (e: string): [HSL, string] => {
+  const [h, s, l] = hexToHSL(e);
   return [{ h, s, l }, 'hsl'];
 };
 
-const pureUnit = (e: any) => {
+const pureUnit = (e: string | number): [number, string] => {
   const t = String(e);
 
   const num = parseFloat(t);
@@ -55,63 +54,50 @@ const pureUnit = (e: any) => {
   return [Number(e), ''];
 };
 
-export const unitSplitter = (styleName: string, value: any) => {
-  const isColor = useColor.filter((e) => e === styleName).length !== 0;
-  if (isColor) return hex2hls(value);
+export const unitSplitter = (styleName: string, value: string | number) => {
+  const isColor = useColor.includes(styleName);
+  if (isColor) return hex2hls(String(value));
   return pureUnit(value);
 };
 
+const transformFunction = (key: string, value: string | number) =>
+  `${functionName[key]}(${value}${unitName[key]})`;
+
 export const InitTransformCombiner = (style: object) => {
-  const result: any = {};
-  Object.entries(style).forEach((t) => {
-    const [key, value] = t;
-    const isTransform = useTransform.filter((e) => e === key);
+  const result: Record<string, unknown> = {};
+  const transform: string[] = [];
 
-    if (isTransform.length > 0) {
-      const [key] = isTransform;
-      const matchKey = Object.entries(functionName).filter((e) => e[0] === key);
-      const f = matchKey[0][1];
-      const matchUnit = Object.entries(unitName).filter((e) => e[0] === key);
-      const u = matchUnit[0][1];
-
-      if (result.transform) {
-        result.transform += ` ${f}(${value}${u})`;
-      } else result.transform = `${f}(${value}${u})`;
-    } else result[key] = value;
+  Object.entries(style).forEach(([key, value]) => {
+    if (useTransform.includes(key)) transform.push(transformFunction(key, value));
+    else result[key] = value;
   });
 
+  if (transform.length) result.transform = transform.join(' ');
   return result as CSSProperties;
 };
 
-export const UnitCombiner = (e: any, u: any) => {
-  const result: any = {};
-  Object.entries(e).forEach((t) => {
-    const [key, value] = t;
+export const UnitCombiner = (e: TweenValues, u: Record<string, string>) => {
+  const result: Record<string, unknown> = {};
+  const transform: string[] = [];
+
+  Object.entries(e).forEach(([key, value]) => {
     const [classname, c] = key.split('@');
     const unit = u[classname];
-    const isTransform = useTransform.filter((e) => e === key);
     if (unit === 'hsl') {
-      result[classname] = { ...result[classname], [c]: value };
-    } else if (isTransform.length > 0) {
-      const [key] = isTransform;
-      const matchKey = Object.entries(functionName).filter((e) => e[0] === key);
-      const f = matchKey[0][1];
-      const matchUnit = Object.entries(unitName).filter((e) => e[0] === key);
-      const u = matchUnit[0][1];
-      if (result.transform) {
-        result.transform += ` ${f}(${value}${u})`;
-      } else result.transform = `${f}(${value}${u})`;
+      result[classname] = { ...(result[classname] as Partial<HSL>), [c]: value };
+    } else if (useTransform.includes(key)) {
+      transform.push(transformFunction(key, value));
     } else result[classname] = `${value}${unit}`;
   });
 
-  Object.entries(result).forEach((e) => {
-    const [key, value] = e;
-    const isHSL = useColor.filter((e) => e === key);
-    if (isHSL.length !== 0) {
+  if (transform.length) result.transform = transform.join(' ');
+
+  Object.entries(result).forEach(([key, value]) => {
+    if (useColor.includes(key) && typeof value === 'object' && value) {
       const hsl = value as HSL;
-      if (value instanceof Object) result[key] = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+      result[key] = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
     }
   });
 
-  return result;
+  return result as CSSProperties;
 };

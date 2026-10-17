@@ -1,12 +1,16 @@
 import { CSSProperties, ReactElement } from 'react';
 
+export type TweenValues = Record<string, number>;
+
+export type Callback = (values: TweenValues) => void;
+
 export type Setting = {
   duration: number;
   easing: number[];
   delay: number;
-  onStart: Function;
-  onUpdate: Function;
-  onEnd: Function;
+  onStart: Callback;
+  onUpdate: Callback;
+  onEnd: Callback;
 };
 
 export interface Colors {

@@ -4,12 +4,13 @@ import {
   Children,
   cloneElement,
   createElement,
+  ReactElement,
   useEffect,
   useRef,
   useState,
 } from 'react';
 import { InitTransformCombiner, UnitCombiner, unitSplitter } from './mise';
-import { CSS, Options, ProviderProps, Setting, Tween } from './type';
+import { CSS, Options, ProviderProps, Setting, Tween, TweenValues } from './type';
 
 const Bezier = {
   // basic
@@ -74,8 +75,8 @@ const useTween = (initialState: CSS): Tween => {
   const unitRef = useRef({});
 
   const tranFrom = () => {
-    let from: any = {};
-    let unit: any = {};
+    let from: TweenValues = {};
+    let unit: Record<string, string> = {};
 
     if (!Object.keys(fromRef.current).length) {
       Object.entries(state).forEach((e) => {
@@ -83,7 +84,7 @@ const useTween = (initialState: CSS): Tween => {
         const result = unitSplitter(className, value);
         if (result) {
           const [pureValue, pureUnit] = result;
-          if (pureUnit === 'hsl') {
+          if (typeof pureValue === 'object') {
             Object.entries(pureValue).forEach((e) => {
               const [key, v] = e;
               from[`${className}@${key}`] = v;
@@ -102,7 +103,7 @@ const useTween = (initialState: CSS): Tween => {
     return { from, unit };
   };
 
-  const tweenerRef = useRef(new Tweener({ from: tranFrom().from }));
+  const tweenerRef = useRef<Tweener | null>(null);
 
   return [
     InitTransformCombiner(state),
@@ -115,14 +116,14 @@ const useTween = (initialState: CSS): Tween => {
       }
 
       const { from, unit } = tranFrom();
-      const to: any = {};
+      const to: TweenValues = {};
       Object.entries(style).forEach((e) => {
         const [className, value] = e;
 
         const result = unitSplitter(className, value);
         if (result) {
-          const [pureValue, pureUnit] = result;
-          if (pureUnit === 'hsl') {
+          const [pureValue] = result;
+          if (typeof pureValue === 'object') {
             Object.entries(pureValue).forEach((e) => {
               const [key, v] = e;
               to[`${className}@${key}`] = v;
@@ -131,7 +132,7 @@ const useTween = (initialState: CSS): Tween => {
         }
       });
 
-      const tweener = tweenerRef.current;
+      const tweener = (tweenerRef.current ??= new Tweener({ from }));
       tweener
         .stop()
         .clearQueue()
@@ -139,12 +140,12 @@ const useTween = (initialState: CSS): Tween => {
           to,
           from,
           ...opt,
-          onUpdate: (e: any) => {
+          onUpdate: (e: TweenValues) => {
             fromRef.current = e;
             setState(UnitCombiner(e, unit));
             opt.onUpdate(e);
           },
-          onComplete: (e: any) => {
+          onComplete: (e: TweenValues) => {
             fromRef.current = e;
             setState(UnitCombiner(e, unit));
             opt.onEnd(e);
@@ -173,7 +174,7 @@ const TweenProvider = ({
 
   return Children.map(children, (child) => {
     if (typeof child === 'string') return createElement('div', { style, children: child });
-    const element = child as React.ReactElement<any>;
+    const element = child as ReactElement<{ style?: CSSProperties }>;
     return cloneElement(element, { ...element.props, style: { ...element.props.style, ...style } });
   });
 };

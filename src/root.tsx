@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import useTween, { Bezier, TweenProvider } from '.';
 
 const App = () => {
   const [style, setStyle] = useTween({ opacity: 1, backgroundColor: '#ff6600', x: 0, y: 0 });
+  const [targets] = useState(() =>
+    [...new Array(10).keys()].map(() => ({ x: Math.random() * 100, y: Math.random() * 100 })),
+  );
   return (
     <div className='flex w-full justify-center'>
       <div className='w-full max-w-4xl p-20'>
@@ -25,11 +29,11 @@ const App = () => {
         >
           play
         </button>
-        {[...new Array(10).keys()].map((index) => (
+        {targets.map((target, index) => (
           <TweenProvider
             key={index}
             initStyle={{ x: 0, y: 0 }}
-            tweenStyle={{ x: Math.random() * 100, y: Math.random() * 100 }}
+            tweenStyle={target}
             options={{ duration: 2000, easing: Bezier.InOutQuint, delay: 500 }}
           >
             <div className='h-10 w-10 rounded-full bg-blue-500'></div>
