@@ -40,7 +40,12 @@ export default defineConfig({
     plugins: [
         react(),
         cssInjectedByJsPlugin(),
-        dtsPlugin({ insertTypesEntry: true, outDirs: '../lib' }),
+        dtsPlugin({
+            insertTypesEntry: true,
+            outDirs: '../lib',
+            include: ['**/*.ts', '**/*.tsx'],
+            exclude: ['root.tsx'],
+        }),
     ],
     server: {
         open: true,
